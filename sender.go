@@ -81,12 +81,14 @@ func sender_encode(messages <-chan Message, count int) {
 func sender_send(datas <-chan []byte) {
 	conn, err := sender_pool.Get()
 	if err != nil {
+		IOWRITER.Write([]byte(err.Error()))
 		return
 	}
 	defer conn.Close()
 	for data := range datas {
 		_, err = conn.Write(data)
 		if err != nil {
+			IOWRITER.Write([]byte(err.Error()))
 			return
 		}
 	}

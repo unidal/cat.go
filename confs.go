@@ -2,6 +2,7 @@ package cat
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net"
 	"net/http"
@@ -16,15 +17,16 @@ import (
 //Fortunately invalid configs causes failure of cat's init,
 //thus users can be immediately aware of config fault.
 var (
-	PROD        string = "http://cat.ctripcorp.com"
-	FAT         string = "http://cat.fws.qa.nt.ctripcorp.com"
-	UAT         string = "http://cat.uat.qa.nt.ctripcorp.com"
-	CAT_HOST    string = FAT
+	PROD        string    = "http://cat.ctripcorp.com"
+	FAT         string    = "http://cat.fws.qa.nt.ctripcorp.com"
+	UAT         string    = "http://cat.uat.qa.nt.ctripcorp.com"
+	CAT_HOST    string    = FAT
 	CAT_SERVERS []string
-	DOMAIN      string = "900407"
-	HOSTNAME    string = ""
-	IP          string = ""
-	TEMPFILE    string = ".cat"
+	DOMAIN      string    = "900407"
+	HOSTNAME    string    = ""
+	IP          string    = ""
+	TEMPFILE    string    = ".cat"
+	IOWRITER    io.Writer = nil
 )
 
 func cat_config_init() {
